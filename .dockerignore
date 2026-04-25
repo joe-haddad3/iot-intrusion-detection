@@ -1,0 +1,52 @@
+# Virtual environment
+venv/
+.venv/
+
+# Datasets
+data/
+
+# Large model files (too big for Docker)
+models/rf_model.pkl
+models/stack_rf_model.pkl
+models/stack_oof_fold_checkpoint.npz
+models/stack_oof_checkpoint.npz
+
+# Outputs and reports
+outputs/
+reports/
+
+# Claude AI
+.claude/
+
+# Git
+.git/
+
+# Notebooks
+*.ipynb
+
+# Bad pip artifacts
+=0.12.0
+=4.0.0
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+
+# Scripts not needed in container
+stream_demo.py
+build_live_demo.py
+train_all.py
+src/preprocess.py
+src/logistic_regression.py
+src/randomforest.py
+src/xgboost_model.py
+src/lightgbm_model.py
+src/lgbm_smote.py
+src/lgbm_smote_tuned.py
+src/neural_network.py
+src/neural_network_focal.py
+src/stacking_ensemble.py
+src/train_binary.py
+src/save_drift_reference.py
+src/explore.py
