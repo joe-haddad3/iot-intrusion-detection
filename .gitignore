@@ -1,7 +1,46 @@
+# Virtual environment
 venv/
-__pycache__/
-*.pyc
-data/
+.venv/
+env/
+
+# Trained models (too large for git)
 models/
-.env
+
+# Dataset files (too large for git)
+data/
+
+# Generated outputs
+outputs/
+
+# Claude AI settings
+.claude/
+
+# Bad pip install artifacts
+=0.12.0
+=4.0.0
+
+# Python cache
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+
+# Jupyter checkpoints
+.ipynb_checkpoints/
+
+# IDE
 .vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Logs
+*.log
+
+# Build
+*.egg-info/
+dist/
+build/
