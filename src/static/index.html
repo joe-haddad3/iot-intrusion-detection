@@ -703,9 +703,7 @@ header {
 }
 
 /* ─── EXAMPLES SECTION ───────────────────────────────────────── */
-.examples-section {
-  padding: 28px 0 32px;
-}
+.examples-section { padding: 28px 0 32px; }
 
 .section-head {
   display: flex;
@@ -714,90 +712,56 @@ header {
   margin-bottom: 16px;
 }
 
-.section-title {
-  font-size: 13px;
-  font-weight: 600;
-  color: var(--text);
-}
+.section-title { font-size: 13px; font-weight: 600; color: var(--text); }
+.section-desc  { font-size: 12px; color: var(--text-3); margin-left: auto; }
 
-.section-desc {
-  font-size: 12px;
+.category-group { margin-bottom: 20px; }
+
+.category-label {
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .08em;
   color: var(--text-3);
-  margin-left: auto;
+  margin-bottom: 10px;
+  padding-left: 2px;
 }
 
 .examples-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 14px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
 }
 
-.example-card {
+.example-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  border-radius: 20px;
+  border: 1px solid var(--border-md);
   background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-lg);
-  padding: 18px 18px 16px;
   cursor: pointer;
-  transition: border-color var(--transition), transform var(--transition), box-shadow var(--transition);
-  position: relative;
-  overflow: hidden;
-}
-
-.example-card::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(135deg, rgba(255,255,255,.02), transparent);
-  pointer-events: none;
-}
-
-.example-card:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 24px rgba(0,0,0,.3);
-}
-
-.example-icon {
-  width: 36px;
-  height: 36px;
-  border-radius: 9px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: 12px;
-  font-size: 18px;
-}
-
-.example-label {
+  transition: var(--transition);
   font-size: 11px;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: .07em;
-  margin-bottom: 4px;
-}
-
-.example-name {
-  font-size: 13px;
-  font-weight: 600;
-  color: var(--text);
   font-family: var(--mono);
-  margin-bottom: 6px;
+  font-weight: 500;
+  color: var(--text-2);
+  white-space: nowrap;
 }
 
-.example-desc {
-  font-size: 11px;
-  color: var(--text-3);
-  line-height: 1.5;
+.example-chip:hover {
+  background: var(--surface-3);
+  color: var(--text);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0,0,0,.25);
 }
 
-.example-hint {
-  display: flex;
-  align-items: center;
-  gap: 5px;
-  margin-top: 12px;
-  padding-top: 12px;
-  border-top: 1px solid var(--border);
-  font-size: 11px;
-  color: var(--text-3);
+.chip-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  flex-shrink: 0;
 }
 
 /* ─── FOOTER ─────────────────────────────────────────────────── */
@@ -1088,64 +1052,87 @@ footer {
     <div class="section-head">
       <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="var(--text-3)" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
       <span class="section-title">Example Payloads</span>
-      <span class="section-desc">Click any card to load a real traffic sample into the editor</span>
+      <span class="section-desc">Real unseen samples from dataset — click any to load into editor</span>
     </div>
 
-    <div class="examples-grid">
-
-      <!-- BENIGN -->
-      <div class="example-card" onclick="loadExample('BENIGN')" style="border-color:rgba(0,214,143,.15)">
-        <div class="example-card:hover { border-color: rgba(0,214,143,.35); }"></div>
-        <style>.eg-benign:hover { border-color: rgba(0,214,143,.35) !important; }</style>
-        <div class="example-card eg-benign" style="border:none;background:transparent;padding:0;border-radius:0;cursor:default;" onclick="">
-        </div>
-        <div class="example-icon" style="background:rgba(0,214,143,.1);color:var(--green)">🟢</div>
-        <div class="example-label" style="color:var(--green)">Safe Traffic</div>
-        <div class="example-name">BENIGN</div>
-        <div class="example-desc">Normal TCP session — mix of HTTP/HTTPS with typical packet sizes and intervals</div>
-        <div class="example-hint">
-          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-          Load payload
-        </div>
+    <!-- BENIGN -->
+    <div class="category-group">
+      <div class="category-label" style="color:var(--green)">Safe Traffic</div>
+      <div class="examples-grid">
+        <div class="example-chip" onclick="loadExample('BENIGN')"><span class="chip-dot" style="background:var(--green)"></span>BENIGN</div>
       </div>
-
-      <!-- DDoS -->
-      <div class="example-card" onclick="loadExample('DDOS')" style="border-color:rgba(244,81,74,.15)">
-        <div class="example-icon" style="background:rgba(244,81,74,.1);color:var(--red)">🔴</div>
-        <div class="example-label" style="color:var(--red)">Volumetric Attack</div>
-        <div class="example-name">DDOS-ICMP_FLOOD</div>
-        <div class="example-desc">High-rate ICMP flood — extreme packet rate with fixed small packet sizes</div>
-        <div class="example-hint">
-          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-          Load payload
-        </div>
-      </div>
-
-      <!-- DNS Spoofing -->
-      <div class="example-card" onclick="loadExample('DNS')" style="border-color:rgba(245,197,24,.15)">
-        <div class="example-icon" style="background:rgba(245,197,24,.1);color:var(--yellow)">🟡</div>
-        <div class="example-label" style="color:var(--yellow)">Spoofing Attack</div>
-        <div class="example-name">DNS_SPOOFING</div>
-        <div class="example-desc">DNS record poisoning — unusual UDP traffic to port 53 with crafted responses</div>
-        <div class="example-hint">
-          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-          Load payload
-        </div>
-      </div>
-
-      <!-- MITM / ARP -->
-      <div class="example-card" onclick="loadExample('MITM')" style="border-color:rgba(139,92,246,.15)">
-        <div class="example-icon" style="background:rgba(139,92,246,.1);color:var(--purple)">🟣</div>
-        <div class="example-label" style="color:var(--purple)">Man in the Middle</div>
-        <div class="example-name">MITM-ARPSPOOFING</div>
-        <div class="example-desc">ARP cache poisoning — intercepted layer-2 traffic with spoofed MAC mappings</div>
-        <div class="example-hint">
-          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-          Load payload
-        </div>
-      </div>
-
     </div>
+
+    <!-- DDoS -->
+    <div class="category-group">
+      <div class="category-label" style="color:var(--red)">DDoS Attacks</div>
+      <div class="examples-grid">
+        <div class="example-chip" onclick="loadExample('DDOS-ACK_FRAGMENTATION')"><span class="chip-dot" style="background:var(--red)"></span>ACK_FRAGMENTATION</div>
+        <div class="example-chip" onclick="loadExample('DDOS-HTTP_FLOOD')"><span class="chip-dot" style="background:var(--red)"></span>HTTP_FLOOD</div>
+        <div class="example-chip" onclick="loadExample('DDOS-ICMP_FLOOD')"><span class="chip-dot" style="background:var(--red)"></span>ICMP_FLOOD</div>
+        <div class="example-chip" onclick="loadExample('DDOS-ICMP_FRAGMENTATION')"><span class="chip-dot" style="background:var(--red)"></span>ICMP_FRAGMENTATION</div>
+        <div class="example-chip" onclick="loadExample('DDOS-PSHACK_FLOOD')"><span class="chip-dot" style="background:var(--red)"></span>PSHACK_FLOOD</div>
+        <div class="example-chip" onclick="loadExample('DDOS-RSTFINFLOOD')"><span class="chip-dot" style="background:var(--red)"></span>RSTFINFLOOD</div>
+        <div class="example-chip" onclick="loadExample('DDOS-SLOWLORIS')"><span class="chip-dot" style="background:var(--red)"></span>SLOWLORIS</div>
+        <div class="example-chip" onclick="loadExample('DDOS-SYNONYMOUSIP_FLOOD')"><span class="chip-dot" style="background:var(--red)"></span>SYNONYMOUSIP_FLOOD</div>
+        <div class="example-chip" onclick="loadExample('DDOS-SYN_FLOOD')"><span class="chip-dot" style="background:var(--red)"></span>SYN_FLOOD</div>
+        <div class="example-chip" onclick="loadExample('DDOS-TCP_FLOOD')"><span class="chip-dot" style="background:var(--red)"></span>TCP_FLOOD</div>
+        <div class="example-chip" onclick="loadExample('DDOS-UDP_FLOOD')"><span class="chip-dot" style="background:var(--red)"></span>UDP_FLOOD</div>
+        <div class="example-chip" onclick="loadExample('DDOS-UDP_FRAGMENTATION')"><span class="chip-dot" style="background:var(--red)"></span>UDP_FRAGMENTATION</div>
+      </div>
+    </div>
+
+    <!-- DoS -->
+    <div class="category-group">
+      <div class="category-label" style="color:var(--orange)">DoS Attacks</div>
+      <div class="examples-grid">
+        <div class="example-chip" onclick="loadExample('DOS-SYN_FLOOD')"><span class="chip-dot" style="background:var(--orange)"></span>DOS-SYN_FLOOD</div>
+        <div class="example-chip" onclick="loadExample('DOS-TCP_FLOOD')"><span class="chip-dot" style="background:var(--orange)"></span>DOS-TCP_FLOOD</div>
+        <div class="example-chip" onclick="loadExample('DOS-UDP_FLOOD')"><span class="chip-dot" style="background:var(--orange)"></span>DOS-UDP_FLOOD</div>
+      </div>
+    </div>
+
+    <!-- Mirai -->
+    <div class="category-group">
+      <div class="category-label" style="color:var(--pink)">Mirai Botnet</div>
+      <div class="examples-grid">
+        <div class="example-chip" onclick="loadExample('MIRAI-GREETH_FLOOD')"><span class="chip-dot" style="background:var(--pink)"></span>GREETH_FLOOD</div>
+        <div class="example-chip" onclick="loadExample('MIRAI-GREIP_FLOOD')"><span class="chip-dot" style="background:var(--pink)"></span>GREIP_FLOOD</div>
+        <div class="example-chip" onclick="loadExample('MIRAI-UDPPLAIN')"><span class="chip-dot" style="background:var(--pink)"></span>UDPPLAIN</div>
+      </div>
+    </div>
+
+    <!-- Recon -->
+    <div class="category-group">
+      <div class="category-label" style="color:var(--yellow)">Reconnaissance</div>
+      <div class="examples-grid">
+        <div class="example-chip" onclick="loadExample('RECON-HOSTDISCOVERY')"><span class="chip-dot" style="background:var(--yellow)"></span>HOSTDISCOVERY</div>
+        <div class="example-chip" onclick="loadExample('RECON-PORTSCAN')"><span class="chip-dot" style="background:var(--yellow)"></span>PORTSCAN</div>
+      </div>
+    </div>
+
+    <!-- Spoofing / MITM -->
+    <div class="category-group">
+      <div class="category-label" style="color:var(--purple)">Spoofing / MITM</div>
+      <div class="examples-grid">
+        <div class="example-chip" onclick="loadExample('DNS_SPOOFING')"><span class="chip-dot" style="background:var(--purple)"></span>DNS_SPOOFING</div>
+        <div class="example-chip" onclick="loadExample('MITM-ARPSPOOFING')"><span class="chip-dot" style="background:var(--purple)"></span>MITM-ARPSPOOFING</div>
+      </div>
+    </div>
+
+    <!-- Web / App Attacks -->
+    <div class="category-group">
+      <div class="category-label" style="color:var(--cyan)">Web & Application Attacks</div>
+      <div class="examples-grid">
+        <div class="example-chip" onclick="loadExample('BACKDOOR_MALWARE')"><span class="chip-dot" style="background:var(--cyan)"></span>BACKDOOR_MALWARE</div>
+        <div class="example-chip" onclick="loadExample('BROWSERHIJACKING')"><span class="chip-dot" style="background:var(--cyan)"></span>BROWSERHIJACKING</div>
+        <div class="example-chip" onclick="loadExample('COMMANDINJECTION')"><span class="chip-dot" style="background:var(--cyan)"></span>COMMANDINJECTION</div>
+        <div class="example-chip" onclick="loadExample('SQLINJECTION')"><span class="chip-dot" style="background:var(--cyan)"></span>SQLINJECTION</div>
+        <div class="example-chip" onclick="loadExample('UPLOADING_ATTACK')"><span class="chip-dot" style="background:var(--cyan)"></span>UPLOADING_ATTACK</div>
+        <div class="example-chip" onclick="loadExample('VULNERABILITYSCAN')"><span class="chip-dot" style="background:var(--cyan)"></span>VULNERABILITYSCAN</div>
+      </div>
+    </div>
+
   </div>
 
 </div>
@@ -1156,60 +1143,37 @@ footer {
 </footer>
 
 <script>
-// ─── SAMPLE PAYLOADS ──────────────────────────────────────────────
+// ─── SAMPLE PAYLOADS (real unseen samples from live_demo.csv) ─────
 const PAYLOADS = {
-  BENIGN: {
-    "Header_Length":20,"Protocol_Type":6,"Time_To_Live":62,
-    "Rate":102.56,"fin_flag_number":0,"syn_flag_number":0,
-    "rst_flag_number":0,"psh_flag_number":0.2,"ack_flag_number":0.5,
-    "ece_flag_number":0,"cwr_flag_number":0,"ack_count":5,
-    "syn_count":0,"fin_count":0,"rst_count":0,
-    "HTTP":0,"HTTPS":0.5,"DNS":0,"Telnet":0,"SMTP":0,"SSH":0,
-    "IRC":0,"TCP":0.5,"UDP":0.5,"DHCP":0,"ARP":0,"ICMP":0,
-    "IGMP":0,"IPv":1,"LLC":1,
-    "Tot_sum":4425,"Min":60,"Max":1514,"AVG":442.5,
-    "Std":617.83,"Tot_size":442.5,"IAT":0.0099,
-    "Number":10,"Variance":381710.5
-  },
-  DDOS: {
-    "Header_Length":0.32,"Protocol_Type":1,"Time_To_Live":63.96,
-    "Rate":28944.2,"fin_flag_number":0,"syn_flag_number":0,
-    "rst_flag_number":0,"psh_flag_number":0,"ack_flag_number":0.01,
-    "ece_flag_number":0,"cwr_flag_number":0,"ack_count":1,
-    "syn_count":0,"fin_count":0,"rst_count":0,
-    "HTTP":0,"HTTPS":0.01,"DNS":0,"Telnet":0,"SMTP":0,"SSH":0,
-    "IRC":0,"TCP":0.01,"UDP":0,"DHCP":0,"ARP":0,"ICMP":0.99,
-    "IGMP":0,"IPv":1,"LLC":1,
-    "Tot_sum":6006,"Min":60,"Max":66,"AVG":60.06,
-    "Std":0.6,"Tot_size":60.06,"IAT":0,
-    "Number":100,"Variance":0.36
-  },
-  DNS: {
-    "Header_Length":20,"Protocol_Type":17,"Time_To_Live":64,
-    "Rate":980.5,"fin_flag_number":0,"syn_flag_number":0,
-    "rst_flag_number":0,"psh_flag_number":0,"ack_flag_number":0,
-    "ece_flag_number":0,"cwr_flag_number":0,"ack_count":0,
-    "syn_count":0,"fin_count":0,"rst_count":0,
-    "HTTP":0,"HTTPS":0,"DNS":1.0,"Telnet":0,"SMTP":0,"SSH":0,
-    "IRC":0,"TCP":0,"UDP":1.0,"DHCP":0,"ARP":0,"ICMP":0,
-    "IGMP":0,"IPv":1,"LLC":1,
-    "Tot_sum":4200,"Min":42,"Max":512,"AVG":84.0,
-    "Std":120.3,"Tot_size":84.0,"IAT":0.001,
-    "Number":50,"Variance":14472.09
-  },
-  MITM: {
-    "Header_Length":52,"Protocol_Type":6,"Time_To_Live":64,
-    "Rate":322638.77,"fin_flag_number":0,"syn_flag_number":0,
-    "rst_flag_number":0,"psh_flag_number":0,"ack_flag_number":1,
-    "ece_flag_number":0,"cwr_flag_number":0,"ack_count":10,
-    "syn_count":0,"fin_count":0,"rst_count":0,
-    "HTTP":0,"HTTPS":1,"DNS":0,"Telnet":0,"SMTP":0,"SSH":0,
-    "IRC":0,"TCP":1,"UDP":0,"DHCP":0,"ARP":0,"ICMP":0,
-    "IGMP":0,"IPv":1,"LLC":1,
-    "Tot_sum":860,"Min":86,"Max":86,"AVG":86,
-    "Std":0,"Tot_size":86,"IAT":0,
-    "Number":10,"Variance":0
-  }
+  "BENIGN":{"Header_Length":21.6,"Protocol_Type":6,"Time_To_Live":113.9,"Rate":55.6796,"fin_flag_number":0.0,"syn_flag_number":0.0,"rst_flag_number":0.0,"psh_flag_number":0.2,"ack_flag_number":0.6,"ece_flag_number":0.0,"cwr_flag_number":0.0,"ack_count":6,"syn_count":0,"fin_count":0,"rst_count":0,"HTTP":0.0,"HTTPS":0.6,"DNS":0.0,"Telnet":0.0,"SMTP":0.0,"SSH":0.0,"IRC":0.0,"TCP":0.6,"UDP":0.3,"DHCP":0.0,"ARP":0.0,"ICMP":0.1,"IGMP":0.0,"IPv":1.0,"LLC":1.0,"Tot_sum":1960,"Min":66,"Max":364,"AVG":196.0,"Std":133.8631,"Tot_size":196.0,"IAT":0.0181,"Number":10,"Variance":17919.3333},
+  "BACKDOOR_MALWARE":{"Header_Length":12.8,"Protocol_Type":17,"Time_To_Live":95.5,"Rate":68.5504,"fin_flag_number":0.0,"syn_flag_number":0.0,"rst_flag_number":0.0,"psh_flag_number":0.1,"ack_flag_number":0.3,"ece_flag_number":0.0,"cwr_flag_number":0.0,"ack_count":3,"syn_count":0,"fin_count":0,"rst_count":0,"HTTP":0.0,"HTTPS":0.3,"DNS":0.2,"Telnet":0.0,"SMTP":0.0,"SSH":0.0,"IRC":0.0,"TCP":0.3,"UDP":0.4,"DHCP":0.0,"ARP":0.0,"ICMP":0.3,"IGMP":0.0,"IPv":1.0,"LLC":1.0,"Tot_sum":1546,"Min":66,"Max":230,"AVG":154.6,"Std":68.17,"Tot_size":154.6,"IAT":0.0161,"Number":10,"Variance":4647.1556},
+  "BROWSERHIJACKING":{"Header_Length":22.4,"Protocol_Type":6,"Time_To_Live":157.6,"Rate":15.6143,"fin_flag_number":0.0,"syn_flag_number":0.0,"rst_flag_number":0.0,"psh_flag_number":0.3,"ack_flag_number":0.6,"ece_flag_number":0.0,"cwr_flag_number":0.0,"ack_count":6,"syn_count":0,"fin_count":0,"rst_count":0,"HTTP":0.0,"HTTPS":0.3,"DNS":0.1,"Telnet":0.0,"SMTP":0.0,"SSH":0.0,"IRC":0.0,"TCP":0.6,"UDP":0.4,"DHCP":0.0,"ARP":0.0,"ICMP":0.0,"IGMP":0.0,"IPv":1.0,"LLC":1.0,"Tot_sum":1503,"Min":60,"Max":267,"AVG":150.3,"Std":76.6218,"Tot_size":150.3,"IAT":0.0678,"Number":10,"Variance":5870.9},
+  "COMMANDINJECTION":{"Header_Length":32.8,"Protocol_Type":6,"Time_To_Live":131.6,"Rate":136.5093,"fin_flag_number":0.1,"syn_flag_number":0.1,"rst_flag_number":0.0,"psh_flag_number":0.2,"ack_flag_number":0.9,"ece_flag_number":0.0,"cwr_flag_number":0.0,"ack_count":9,"syn_count":1,"fin_count":1,"rst_count":0,"HTTP":0.4,"HTTPS":0.6,"DNS":0.0,"Telnet":0.0,"SMTP":0.0,"SSH":0.0,"IRC":0.0,"TCP":1.0,"UDP":0.0,"DHCP":0.0,"ARP":0.0,"ICMP":0.0,"IGMP":0.0,"IPv":1.0,"LLC":1.0,"Tot_sum":6185,"Min":66,"Max":1514,"AVG":618.5,"Std":664.6488,"Tot_size":618.5,"IAT":0.0091,"Number":10,"Variance":441758.0556},
+  "DDOS-ACK_FRAGMENTATION":{"Header_Length":10.32,"Protocol_Type":6,"Time_To_Live":66.78,"Rate":953.1708,"fin_flag_number":0.0,"syn_flag_number":0.0,"rst_flag_number":0.0,"psh_flag_number":0.01,"ack_flag_number":0.51,"ece_flag_number":0.0,"cwr_flag_number":0.0,"ack_count":51,"syn_count":0,"fin_count":0,"rst_count":0,"HTTP":0.0,"HTTPS":0.01,"DNS":0.0,"Telnet":0.0,"SMTP":0.0,"SSH":0.0,"IRC":0.0,"TCP":0.51,"UDP":0.0,"DHCP":0.0,"ARP":0.01,"ICMP":0.0,"IGMP":0.0,"IPv":0.99,"LLC":0.99,"Tot_sum":93835,"Min":60,"Max":1514,"AVG":938.35,"Std":579.9034,"Tot_size":938.35,"IAT":0.0011,"Number":100,"Variance":336287.9268},
+  "DDOS-HTTP_FLOOD":{"Header_Length":37.76,"Protocol_Type":6,"Time_To_Live":64.64,"Rate":3247.2701,"fin_flag_number":0.01,"syn_flag_number":0.78,"rst_flag_number":0.0,"psh_flag_number":0.08,"ack_flag_number":0.21,"ece_flag_number":0.0,"cwr_flag_number":0.0,"ack_count":21,"syn_count":78,"fin_count":1,"rst_count":0,"HTTP":0.97,"HTTPS":0.0,"DNS":0.01,"Telnet":0.0,"SMTP":0.0,"SSH":0.0,"IRC":0.0,"TCP":0.98,"UDP":0.02,"DHCP":0.01,"ARP":0.0,"ICMP":0.0,"IGMP":0.0,"IPv":1.0,"LLC":1.0,"Tot_sum":10286,"Min":66,"Max":908,"AVG":102.86,"Std":110.0183,"Tot_size":102.86,"IAT":0.0003,"Number":100,"Variance":12104.0206},
+  "DDOS-ICMP_FLOOD":{"Header_Length":0.0,"Protocol_Type":1,"Time_To_Live":64.0,"Rate":20846.4414,"fin_flag_number":0.0,"syn_flag_number":0.0,"rst_flag_number":0.0,"psh_flag_number":0.0,"ack_flag_number":0.0,"ece_flag_number":0.0,"cwr_flag_number":0.0,"ack_count":0,"syn_count":0,"fin_count":0,"rst_count":0,"HTTP":0.0,"HTTPS":0.0,"DNS":0.0,"Telnet":0.0,"SMTP":0.0,"SSH":0.0,"IRC":0.0,"TCP":0.0,"UDP":0.0,"DHCP":0.0,"ARP":0.0,"ICMP":1.0,"IGMP":0.0,"IPv":1.0,"LLC":1.0,"Tot_sum":6000,"Min":60,"Max":60,"AVG":60.0,"Std":0.0,"Tot_size":60.0,"IAT":0.0,"Number":100,"Variance":0.0},
+  "DDOS-ICMP_FRAGMENTATION":{"Header_Length":0.0,"Protocol_Type":1,"Time_To_Live":79.28,"Rate":1821.4326,"fin_flag_number":0.0,"syn_flag_number":0.0,"rst_flag_number":0.0,"psh_flag_number":0.0,"ack_flag_number":0.0,"ece_flag_number":0.0,"cwr_flag_number":0.0,"ack_count":0,"syn_count":0,"fin_count":0,"rst_count":0,"HTTP":0.0,"HTTPS":0.0,"DNS":0.0,"Telnet":0.0,"SMTP":0.0,"SSH":0.0,"IRC":0.0,"TCP":0.0,"UDP":0.0,"DHCP":0.0,"ARP":0.0,"ICMP":1.0,"IGMP":0.0,"IPv":1.0,"LLC":1.0,"Tot_sum":93800,"Min":362,"Max":1514,"AVG":938.0,"Std":578.9018,"Tot_size":938.0,"IAT":0.0005,"Number":100,"Variance":335127.2727},
+  "DDOS-PSHACK_FLOOD":{"Header_Length":20.0,"Protocol_Type":6,"Time_To_Live":64.0,"Rate":45995.2188,"fin_flag_number":0.0,"syn_flag_number":0.0,"rst_flag_number":0.0,"psh_flag_number":1.0,"ack_flag_number":1.0,"ece_flag_number":0.0,"cwr_flag_number":0.0,"ack_count":100,"syn_count":0,"fin_count":0,"rst_count":0,"HTTP":0.0,"HTTPS":0.0,"DNS":0.0,"Telnet":0.0,"SMTP":0.0,"SSH":0.0,"IRC":0.0,"TCP":1.0,"UDP":0.0,"DHCP":0.0,"ARP":0.0,"ICMP":0.0,"IGMP":0.0,"IPv":1.0,"LLC":1.0,"Tot_sum":6000,"Min":60,"Max":60,"AVG":60.0,"Std":0.0,"Tot_size":60.0,"IAT":0.0,"Number":100,"Variance":0.0},
+  "DDOS-RSTFINFLOOD":{"Header_Length":20.0,"Protocol_Type":6,"Time_To_Live":64.0,"Rate":28439.8156,"fin_flag_number":1.0,"syn_flag_number":0.0,"rst_flag_number":1.0,"psh_flag_number":0.0,"ack_flag_number":0.0,"ece_flag_number":0.0,"cwr_flag_number":0.0,"ack_count":0,"syn_count":0,"fin_count":100,"rst_count":100,"HTTP":0.0,"HTTPS":0.0,"DNS":0.0,"Telnet":0.0,"SMTP":0.0,"SSH":0.0,"IRC":0.0,"TCP":1.0,"UDP":0.0,"DHCP":0.0,"ARP":0.0,"ICMP":0.0,"IGMP":0.0,"IPv":1.0,"LLC":1.0,"Tot_sum":6000,"Min":60,"Max":60,"AVG":60.0,"Std":0.0,"Tot_size":60.0,"IAT":0.0,"Number":100,"Variance":0.0},
+  "DDOS-SLOWLORIS":{"Header_Length":34.04,"Protocol_Type":6,"Time_To_Live":64.0,"Rate":6062.4471,"fin_flag_number":0.0,"syn_flag_number":0.0,"rst_flag_number":0.0,"psh_flag_number":0.39,"ack_flag_number":1.0,"ece_flag_number":0.0,"cwr_flag_number":0.0,"ack_count":100,"syn_count":0,"fin_count":0,"rst_count":0,"HTTP":0.99,"HTTPS":0.01,"DNS":0.0,"Telnet":0.0,"SMTP":0.0,"SSH":0.0,"IRC":0.0,"TCP":1.0,"UDP":0.0,"DHCP":0.0,"ARP":0.0,"ICMP":0.0,"IGMP":0.0,"IPv":1.0,"LLC":1.0,"Tot_sum":7226,"Min":66,"Max":78,"AVG":72.26,"Std":5.5969,"Tot_size":72.26,"IAT":0.0002,"Number":100,"Variance":31.3257},
+  "DDOS-SYNONYMOUSIP_FLOOD":{"Header_Length":19.88,"Protocol_Type":6,"Time_To_Live":65.91,"Rate":24195.5812,"fin_flag_number":0.0,"syn_flag_number":0.99,"rst_flag_number":0.0,"psh_flag_number":0.0,"ack_flag_number":0.0,"ece_flag_number":0.0,"cwr_flag_number":0.0,"ack_count":0,"syn_count":99,"fin_count":0,"rst_count":0,"HTTP":0.0,"HTTPS":0.0,"DNS":0.0,"Telnet":0.0,"SMTP":0.0,"SSH":0.0,"IRC":0.0,"TCP":0.99,"UDP":0.01,"DHCP":0.0,"ARP":0.0,"ICMP":0.0,"IGMP":0.0,"IPv":1.0,"LLC":1.0,"Tot_sum":6170,"Min":60,"Max":230,"AVG":61.7,"Std":17.0,"Tot_size":61.7,"IAT":0.0,"Number":100,"Variance":289.0},
+  "DDOS-SYN_FLOOD":{"Header_Length":20.0,"Protocol_Type":6,"Time_To_Live":64.0,"Rate":21298.4512,"fin_flag_number":0.0,"syn_flag_number":1.0,"rst_flag_number":0.0,"psh_flag_number":0.0,"ack_flag_number":0.0,"ece_flag_number":0.0,"cwr_flag_number":0.0,"ack_count":0,"syn_count":100,"fin_count":0,"rst_count":0,"HTTP":0.0,"HTTPS":0.0,"DNS":0.0,"Telnet":0.0,"SMTP":0.0,"SSH":0.0,"IRC":0.0,"TCP":1.0,"UDP":0.0,"DHCP":0.0,"ARP":0.0,"ICMP":0.0,"IGMP":0.0,"IPv":1.0,"LLC":1.0,"Tot_sum":6000,"Min":60,"Max":60,"AVG":60.0,"Std":0.0,"Tot_size":60.0,"IAT":0.0,"Number":100,"Variance":0.0},
+  "DDOS-TCP_FLOOD":{"Header_Length":20.0,"Protocol_Type":6,"Time_To_Live":64.0,"Rate":42052.3762,"fin_flag_number":0.0,"syn_flag_number":0.0,"rst_flag_number":0.0,"psh_flag_number":0.0,"ack_flag_number":0.0,"ece_flag_number":0.0,"cwr_flag_number":0.0,"ack_count":0,"syn_count":0,"fin_count":0,"rst_count":0,"HTTP":0.0,"HTTPS":0.0,"DNS":0.0,"Telnet":0.0,"SMTP":0.0,"SSH":0.0,"IRC":0.0,"TCP":1.0,"UDP":0.0,"DHCP":0.0,"ARP":0.0,"ICMP":0.0,"IGMP":0.0,"IPv":1.0,"LLC":1.0,"Tot_sum":6000,"Min":60,"Max":60,"AVG":60.0,"Std":0.0,"Tot_size":60.0,"IAT":0.0,"Number":100,"Variance":0.0},
+  "DDOS-UDP_FLOOD":{"Header_Length":7.92,"Protocol_Type":17,"Time_To_Live":63.36,"Rate":43919.4136,"fin_flag_number":0.0,"syn_flag_number":0.0,"rst_flag_number":0.0,"psh_flag_number":0.0,"ack_flag_number":0.0,"ece_flag_number":0.0,"cwr_flag_number":0.0,"ack_count":0,"syn_count":0,"fin_count":0,"rst_count":0,"HTTP":0.0,"HTTPS":0.0,"DNS":0.0,"Telnet":0.0,"SMTP":0.0,"SSH":0.0,"IRC":0.0,"TCP":0.0,"UDP":0.99,"DHCP":0.0,"ARP":0.01,"ICMP":0.0,"IGMP":0.0,"IPv":0.99,"LLC":0.99,"Tot_sum":6000,"Min":60,"Max":60,"AVG":60.0,"Std":0.0,"Tot_size":60.0,"IAT":0.0,"Number":100,"Variance":0.0},
+  "DDOS-UDP_FRAGMENTATION":{"Header_Length":24.44,"Protocol_Type":6,"Time_To_Live":87.47,"Rate":174.4083,"fin_flag_number":0.0,"syn_flag_number":0.0,"rst_flag_number":0.0,"psh_flag_number":0.18,"ack_flag_number":0.67,"ece_flag_number":0.0,"cwr_flag_number":0.0,"ack_count":67,"syn_count":0,"fin_count":0,"rst_count":0,"HTTP":0.0,"HTTPS":0.67,"DNS":0.01,"Telnet":0.0,"SMTP":0.0,"SSH":0.0,"IRC":0.0,"TCP":0.67,"UDP":0.33,"DHCP":0.0,"ARP":0.0,"ICMP":0.0,"IGMP":0.0,"IPv":1.0,"LLC":1.0,"Tot_sum":61767,"Min":60,"Max":4410,"AVG":617.67,"Std":880.9329,"Tot_size":617.67,"IAT":0.0058,"Number":100,"Variance":776042.7688},
+  "DNS_SPOOFING":{"Header_Length":7.6,"Protocol_Type":17,"Time_To_Live":70.3,"Rate":91.8309,"fin_flag_number":0.0,"syn_flag_number":0.0,"rst_flag_number":0.0,"psh_flag_number":0.0,"ack_flag_number":0.1,"ece_flag_number":0.0,"cwr_flag_number":0.0,"ack_count":1,"syn_count":0,"fin_count":0,"rst_count":0,"HTTP":0.0,"HTTPS":0.0,"DNS":0.2,"Telnet":0.0,"SMTP":0.0,"SSH":0.0,"IRC":0.0,"TCP":0.1,"UDP":0.7,"DHCP":0.0,"ARP":0.2,"ICMP":0.0,"IGMP":0.0,"IPv":0.8,"LLC":0.8,"Tot_sum":654,"Min":50,"Max":107,"AVG":65.4,"Std":22.287,"Tot_size":65.4,"IAT":0.0113,"Number":10,"Variance":496.7111},
+  "DOS-SYN_FLOOD":{"Header_Length":19.8,"Protocol_Type":6,"Time_To_Live":65.91,"Rate":9128.1725,"fin_flag_number":0.0,"syn_flag_number":0.99,"rst_flag_number":0.0,"psh_flag_number":0.0,"ack_flag_number":0.0,"ece_flag_number":0.0,"cwr_flag_number":0.0,"ack_count":0,"syn_count":99,"fin_count":0,"rst_count":0,"HTTP":0.0,"HTTPS":0.0,"DNS":0.0,"Telnet":0.0,"SMTP":0.0,"SSH":0.0,"IRC":0.0,"TCP":0.99,"UDP":0.0,"DHCP":0.0,"ARP":0.0,"ICMP":0.01,"IGMP":0.0,"IPv":1.0,"LLC":1.0,"Tot_sum":6038,"Min":60,"Max":98,"AVG":60.38,"Std":3.8,"Tot_size":60.38,"IAT":0.0001,"Number":100,"Variance":14.44},
+  "DOS-TCP_FLOOD":{"Header_Length":20.0,"Protocol_Type":6,"Time_To_Live":64.0,"Rate":23093.8443,"fin_flag_number":0.0,"syn_flag_number":0.0,"rst_flag_number":0.0,"psh_flag_number":0.0,"ack_flag_number":0.0,"ece_flag_number":0.0,"cwr_flag_number":0.0,"ack_count":0,"syn_count":0,"fin_count":0,"rst_count":0,"HTTP":0.0,"HTTPS":0.0,"DNS":0.0,"Telnet":0.0,"SMTP":0.0,"SSH":0.0,"IRC":0.0,"TCP":1.0,"UDP":0.0,"DHCP":0.0,"ARP":0.0,"ICMP":0.0,"IGMP":0.0,"IPv":1.0,"LLC":1.0,"Tot_sum":6000,"Min":60,"Max":60,"AVG":60.0,"Std":0.0,"Tot_size":60.0,"IAT":0.0,"Number":100,"Variance":0.0},
+  "DOS-UDP_FLOOD":{"Header_Length":8.0,"Protocol_Type":17,"Time_To_Live":64.0,"Rate":25712.9966,"fin_flag_number":0.0,"syn_flag_number":0.0,"rst_flag_number":0.0,"psh_flag_number":0.0,"ack_flag_number":0.0,"ece_flag_number":0.0,"cwr_flag_number":0.0,"ack_count":0,"syn_count":0,"fin_count":0,"rst_count":0,"HTTP":0.0,"HTTPS":0.0,"DNS":0.0,"Telnet":0.0,"SMTP":0.0,"SSH":0.0,"IRC":0.0,"TCP":0.0,"UDP":1.0,"DHCP":0.0,"ARP":0.0,"ICMP":0.0,"IGMP":0.0,"IPv":1.0,"LLC":1.0,"Tot_sum":6000,"Min":60,"Max":60,"AVG":60.0,"Std":0.0,"Tot_size":60.0,"IAT":0.0,"Number":100,"Variance":0.0},
+  "MIRAI-GREETH_FLOOD":{"Header_Length":0.08,"Protocol_Type":47,"Time_To_Live":64.64,"Rate":2612.8014,"fin_flag_number":0.0,"syn_flag_number":0.0,"rst_flag_number":0.0,"psh_flag_number":0.0,"ack_flag_number":0.0,"ece_flag_number":0.0,"cwr_flag_number":0.0,"ack_count":0,"syn_count":0,"fin_count":0,"rst_count":0,"HTTP":0.0,"HTTPS":0.0,"DNS":0.01,"Telnet":0.0,"SMTP":0.0,"SSH":0.0,"IRC":0.0,"TCP":0.0,"UDP":0.01,"DHCP":0.0,"ARP":0.0,"ICMP":0.0,"IGMP":0.0,"IPv":1.0,"LLC":1.0,"Tot_sum":58816,"Min":208,"Max":592,"AVG":588.16,"Std":38.4,"Tot_size":588.16,"IAT":0.0004,"Number":100,"Variance":1474.56},
+  "MIRAI-GREIP_FLOOD":{"Header_Length":0.08,"Protocol_Type":47,"Time_To_Live":62.72,"Rate":598.0969,"fin_flag_number":0.0,"syn_flag_number":0.0,"rst_flag_number":0.0,"psh_flag_number":0.0,"ack_flag_number":0.0,"ece_flag_number":0.0,"cwr_flag_number":0.0,"ack_count":0,"syn_count":0,"fin_count":0,"rst_count":0,"HTTP":0.0,"HTTPS":0.0,"DNS":0.01,"Telnet":0.0,"SMTP":0.0,"SSH":0.0,"IRC":0.0,"TCP":0.0,"UDP":0.01,"DHCP":0.0,"ARP":0.02,"ICMP":0.0,"IGMP":0.0,"IPv":0.98,"LLC":0.98,"Tot_sum":56285,"Min":60,"Max":578,"AVG":562.85,"Std":86.6397,"Tot_size":562.85,"IAT":0.0017,"Number":100,"Variance":7506.4318},
+  "MIRAI-UDPPLAIN":{"Header_Length":7.92,"Protocol_Type":17,"Time_To_Live":64.0,"Rate":12926.6311,"fin_flag_number":0.0,"syn_flag_number":0.0,"rst_flag_number":0.0,"psh_flag_number":0.0,"ack_flag_number":0.0,"ece_flag_number":0.0,"cwr_flag_number":0.0,"ack_count":0,"syn_count":0,"fin_count":0,"rst_count":0,"HTTP":0.0,"HTTPS":0.0,"DNS":0.0,"Telnet":0.0,"SMTP":0.0,"SSH":0.0,"IRC":0.0,"TCP":0.0,"UDP":0.99,"DHCP":0.0,"ARP":0.0,"ICMP":0.01,"IGMP":0.0,"IPv":1.0,"LLC":1.0,"Tot_sum":55428,"Min":554,"Max":582,"AVG":554.28,"Std":2.8,"Tot_size":554.28,"IAT":0.0001,"Number":100,"Variance":7.84},
+  "MITM-ARPSPOOFING":{"Header_Length":8.0,"Protocol_Type":17,"Time_To_Live":128.0,"Rate":10707.95,"fin_flag_number":0.0,"syn_flag_number":0.0,"rst_flag_number":0.0,"psh_flag_number":0.0,"ack_flag_number":0.0,"ece_flag_number":0.0,"cwr_flag_number":0.0,"ack_count":0,"syn_count":0,"fin_count":0,"rst_count":0,"HTTP":0.0,"HTTPS":0.0,"DNS":0.0,"Telnet":0.0,"SMTP":0.0,"SSH":0.0,"IRC":0.0,"TCP":0.0,"UDP":1.0,"DHCP":0.0,"ARP":0.0,"ICMP":0.0,"IGMP":0.0,"IPv":1.0,"LLC":1.0,"Tot_sum":8437,"Min":75,"Max":1164,"AVG":843.7,"Std":514.0378,"Tot_size":843.7,"IAT":0.0001,"Number":10,"Variance":264234.9},
+  "RECON-HOSTDISCOVERY":{"Header_Length":24.4,"Protocol_Type":6,"Time_To_Live":85.6,"Rate":1453.2774,"fin_flag_number":0.0,"syn_flag_number":0.8,"rst_flag_number":0.1,"psh_flag_number":0.1,"ack_flag_number":0.2,"ece_flag_number":0.0,"cwr_flag_number":0.0,"ack_count":2,"syn_count":8,"fin_count":0,"rst_count":1,"HTTP":0.0,"HTTPS":0.1,"DNS":0.0,"Telnet":0.0,"SMTP":0.0,"SSH":0.0,"IRC":0.0,"TCP":1.0,"UDP":0.0,"DHCP":0.0,"ARP":0.0,"ICMP":0.0,"IGMP":0.0,"IPv":1.0,"LLC":1.0,"Tot_sum":653,"Min":60,"Max":113,"AVG":65.3,"Std":16.7601,"Tot_size":65.3,"IAT":0.0009,"Number":10,"Variance":280.9},
+  "RECON-PORTSCAN":{"Header_Length":14.4,"Protocol_Type":6,"Time_To_Live":104.7,"Rate":14.5529,"fin_flag_number":0.0,"syn_flag_number":0.0,"rst_flag_number":0.0,"psh_flag_number":0.2,"ack_flag_number":0.4,"ece_flag_number":0.0,"cwr_flag_number":0.0,"ack_count":4,"syn_count":0,"fin_count":0,"rst_count":0,"HTTP":0.0,"HTTPS":0.4,"DNS":0.1,"Telnet":0.0,"SMTP":0.0,"SSH":0.0,"IRC":0.0,"TCP":0.4,"UDP":0.2,"DHCP":0.0,"ARP":0.2,"ICMP":0.2,"IGMP":0.0,"IPv":0.8,"LLC":0.8,"Tot_sum":972,"Min":60,"Max":230,"AVG":97.2,"Std":51.1334,"Tot_size":97.2,"IAT":0.0724,"Number":10,"Variance":2614.6222},
+  "SQLINJECTION":{"Header_Length":13.6,"Protocol_Type":17,"Time_To_Live":101.8,"Rate":142.7571,"fin_flag_number":0.0,"syn_flag_number":0.1,"rst_flag_number":0.0,"psh_flag_number":0.0,"ack_flag_number":0.2,"ece_flag_number":0.0,"cwr_flag_number":0.0,"ack_count":2,"syn_count":1,"fin_count":0,"rst_count":0,"HTTP":0.1,"HTTPS":0.1,"DNS":0.4,"Telnet":0.0,"SMTP":0.0,"SSH":0.0,"IRC":0.0,"TCP":0.3,"UDP":0.7,"DHCP":0.0,"ARP":0.0,"ICMP":0.0,"IGMP":0.0,"IPv":1.0,"LLC":1.0,"Tot_sum":716,"Min":60,"Max":94,"AVG":71.6,"Std":13.7776,"Tot_size":71.6,"IAT":0.0073,"Number":10,"Variance":189.8222},
+  "UPLOADING_ATTACK":{"Header_Length":23.2,"Protocol_Type":6,"Time_To_Live":87.2,"Rate":30.2404,"fin_flag_number":0.1,"syn_flag_number":0.0,"rst_flag_number":0.0,"psh_flag_number":0.3,"ack_flag_number":0.7,"ece_flag_number":0.0,"cwr_flag_number":0.0,"ack_count":7,"syn_count":0,"fin_count":1,"rst_count":0,"HTTP":0.2,"HTTPS":0.2,"DNS":0.0,"Telnet":0.0,"SMTP":0.0,"SSH":0.0,"IRC":0.0,"TCP":0.7,"UDP":0.1,"DHCP":0.0,"ARP":0.2,"ICMP":0.0,"IGMP":0.0,"IPv":0.8,"LLC":0.8,"Tot_sum":1106,"Min":60,"Max":214,"AVG":110.6,"Std":61.8101,"Tot_size":110.6,"IAT":0.0702,"Number":10,"Variance":3820.4889},
+  "VULNERABILITYSCAN":{"Header_Length":20.0,"Protocol_Type":6,"Time_To_Live":77.3,"Rate":75.6292,"fin_flag_number":0.1,"syn_flag_number":0.1,"rst_flag_number":0.0,"psh_flag_number":0.1,"ack_flag_number":0.4,"ece_flag_number":0.0,"cwr_flag_number":0.0,"ack_count":4,"syn_count":1,"fin_count":1,"rst_count":0,"HTTP":0.4,"HTTPS":0.1,"DNS":0.2,"Telnet":0.0,"SMTP":0.0,"SSH":0.0,"IRC":0.0,"TCP":0.5,"UDP":0.4,"DHCP":0.0,"ARP":0.1,"ICMP":0.0,"IGMP":0.0,"IPv":0.9,"LLC":0.9,"Tot_sum":1389,"Min":60,"Max":441,"AVG":138.9,"Std":125.5162,"Tot_size":138.9,"IAT":0.0135,"Number":10,"Variance":15754.3222}
 };
 
 // ─── STATE ────────────────────────────────────────────────────────
@@ -1585,18 +1549,6 @@ updateClock();
 setInterval(updateClock, 1000);
 setInterval(checkAPI, 15000);
 
-// Hover effect for example cards
-document.querySelectorAll('.example-card').forEach(card => {
-  const borderStyle = card.style.borderColor;
-  card.addEventListener('mouseenter', () => {
-    card.style.borderColor = borderStyle.replace('.15)', '.4)');
-    card.style.boxShadow = '0 6px 24px rgba(0,0,0,.3)';
-  });
-  card.addEventListener('mouseleave', () => {
-    card.style.borderColor = borderStyle;
-    card.style.boxShadow = '';
-  });
-});
 </script>
 </body>
 </html>
